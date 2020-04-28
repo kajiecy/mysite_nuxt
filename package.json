@@ -1,0 +1,32 @@
+{
+  "name": "nuxt_first",
+  "version": "1.0.0",
+  "description": "My solid Nuxt.js project",
+  "author": "kajiecy",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "cross-env": "^5.2.0",
+    "koa": "^2.6.2",
+    "iview": "^3.1.5",
+    "@nuxtjs/axios": "^5.3.6"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^0.6.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "github-markdown-css": "^4.0.0",
+    "node-sass": "^4.14.0",
+    "nodemon": "^1.18.9",
+    "prettier": "^1.19.1",
+    "sass-loader": "^8.0.2",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.2"
+  }
+}
