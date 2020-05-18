@@ -123,6 +123,7 @@
 
 <script lang="ts">
   import { Component, Prop, Vue ,Model,Watch,Inject} from 'vue-property-decorator';
+  import GithubConfig from '~/util/GithubConfig'
 
   Component.registerHooks([
     'beforeRouteEnter',
@@ -148,6 +149,8 @@
       this.$githubApi.milestonesList4Repository().then((milestonesList:any)=>this.$store.commit('setMilestonesList',milestonesList))
       // @ts-ignore
       this.$githubApi.getRepoInfo().then((repoInfo:any)=>{this.$store.commit('setRepoInfo',repoInfo)})
+      // 测试时写入假token
+      localStorage.setItem(GithubConfig.LOCALSTORAGE_NAME,'36913d6bd9498cfb19e4b3a002ff2002cd06d599');
     }
     @Watch("$route", {deep: false})
     watchTopStatus(newValue: any, oldValue: any) {
