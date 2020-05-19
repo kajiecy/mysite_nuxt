@@ -17,7 +17,10 @@ import GithubConfig from './GithubConfig';
 
 // http request 拦截器
 axios.interceptors.request.use((config) => {
-    let token = localStorage.getItem(GithubConfig.LOCALSTORAGE_NAME);
+    let token:string = '36913d6bd9498cfb19e4b3a002ff2002cd06d599';
+    // if(localStorage!=null){
+    //   token = localStorage.getItem(GithubConfig.LOCALSTORAGE_NAME)!
+    // }
     if (token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
         config.headers.Authorization = `token ${token}`
     }

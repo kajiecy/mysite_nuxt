@@ -14,11 +14,12 @@
             <span class="tag-item" style="background-color: #E6A23C"><i class="iconfont icon-riqi"></i>{{getCharCount(item.body)}}字</span>
             <span class="tag-item" style="background-color: #FF4E6A"><i class="iconfont icon-shijian"></i>大概 {{calcReadTime(item.body)}} 分钟</span>
             <span class="tag-item blog-labels"
-                  v-for="(cItem) in item.labels.filter((ccItem)=>ccItem.name.indexOf(':img')===-1)"
-                  @click="$router.push({name:'blog_list',query:{tag:cItem.name}})"
-                  :style="{backgroundColor:'#'+cItem.color}">
-                        <i class="iconfont icon-biaoqian"></i>{{cItem.name}}
-                    </span>
+                v-for="(cItem) in item.labels.filter((ccItem)=>ccItem.name.indexOf(':img')===-1)"
+                @click="$router.push({name:'blog_list',query:{tag:cItem.name}})"
+                :style="{backgroundColor:'#'+cItem.color}">
+              <i class="iconfont icon-biaoqian"></i>
+              {{cItem.name}}
+            </span>
             <span  v-if="item.milestone" class="tag-item" style="background-color:#67C23A;cursor: pointer" @click="$router.push({name:'blog_list',query:{milestone:item.milestone.number}})"><i class="iconfont icon-leimupinleifenleileibie"></i>{{item.milestone.title}}</span>
           </div>
         </div>
@@ -36,7 +37,7 @@
   </div>
 </template>
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
+  import {Component, Vue} from 'nuxt-property-decorator';
   // @ts-ignore
   import PageComponent from '@/components/PageComponent.vue';
 
@@ -49,28 +50,24 @@
     pageNum:number = 1;
     pageSize:number = 10;
     issuesList:any = [];
+
+    async asyncData(context:any) {
+      // console.log('asyncData-------->',context.route)
+      // let issuesList = await context.$githubApi.getIssuesList({milestone:<string>context.route.query.milestone,labels:<string>context.route.query.tag,page:1,perPage:10})
+      // issuesList = [],
+      // return { issuesList: [] };
+    }
+
+
     created(){
-      this.addScrollListen();
+      // this.addScrollListen();
       this.searchIssuesList();
     }
     async searchIssuesList(){
+      // @ts-ignore
       this.issuesList = await this.$githubApi.getIssuesList({milestone:<string>this.$route.query.milestone,labels:<string>this.$route.query.tag,page:this.pageNum,perPage:this.pageSize});
     }
-    addScrollListen(){
-      // window.onscroll = function(){
-      //   //变量scrollTop是滚动条滚动时，距离顶部的距离
-      //   var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
-      //   //变量windowHeight是可视区的高度
-      //   var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-      //   //变量scrollHeight是滚动条的总高度
-      //   var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
-      //   //滚动条到底部的条件
-      //   if(scrollTop+windowHeight==scrollHeight){
-      //     //写后台加载数据的函数
-      //     console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
-      //   }
-      // }
-    }
+
     getBlogImg(blogItem:any){
       let imgUrl = '';
       if(blogItem.labels&&blogItem.labels.length){
@@ -238,3 +235,53 @@
     }
   }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<template>-->
+<!--  <div class="blog-list">-->
+<!--    Name: {{ fullName }}-->
+<!--    Message: {{ message }}-->
+<!--  </div>-->
+<!--</template>-->
+<!--<script lang="ts">-->
+<!--  // 這裡編寫 TypeScript 程式碼-->
+
+<!--  import { Vue, Component, Prop } from 'nuxt-property-decorator'-->
+
+<!--  interface User {-->
+<!--    firstName: string-->
+<!--    lastName: number-->
+<!--  }-->
+
+<!--  @Component-->
+<!--  export default class YourComponent extends Vue {-->
+<!--    message: string = 'This is a message'-->
+<!--    user:User = {firstName:'111',lastName:222};-->
+
+
+<!--    mounted () {-->
+<!--      console.log('mounted 111111111111111111')-->
+<!--    }-->
+<!--    asyncData (context:any) {-->
+<!--      console.log('asyncData 122222222222')-->
+<!--      return {-->
+<!--        message:'hello asyncData'-->
+<!--      }-->
+<!--      // context.app.$myInjectedFunction('works in asyncData')-->
+<!--    }-->
+
+<!--    get fullName (): string {-->
+<!--      return `${this.user.firstName} ${this.user.lastName}`-->
+<!--    }-->
+<!--  }-->
+<!--</script>-->

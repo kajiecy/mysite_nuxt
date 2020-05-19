@@ -26,7 +26,6 @@ class GithubApi {
     private readonly _repo:string;
 
     constructor({clientId,clientSecret,owner,repo}:{clientId:string,clientSecret:string,owner:string,repo:string}){
-        console.log('被示例化了',clientSecret);
         this._clientId = clientId;
         this._clientSecret = clientSecret;
         this._owner = owner;
@@ -47,7 +46,9 @@ class GithubApi {
             let getTokenResult = commonUtil.urlParam2Json(res);
             if(!getTokenResult.error){
                 //将token存到localStorage
-                localStorage.setItem(GithubConfig.LOCALSTORAGE_NAME,getTokenResult.access_token);
+                if(localStorage!=null){
+                  localStorage.setItem(GithubConfig.LOCALSTORAGE_NAME,getTokenResult.access_token);
+                }
                 resolve(getTokenResult);
             }else {
                 console.error(`授权失败：${getTokenResult.error}`);

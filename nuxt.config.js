@@ -63,6 +63,15 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    babel: {
+      presets({ isServer }) {
+        return [
+          [
+            "@nuxt/babel-preset-app", { loose: true }
+          ]
+        ]
+      }
+    },
     extend (config, ctx) {
     }
   }
